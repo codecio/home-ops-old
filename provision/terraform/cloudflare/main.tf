@@ -108,3 +108,12 @@ resource "cloudflare_record" "hajimari" {
   type    = "CNAME"
   ttl     = 1
 }
+
+resource "cloudflare_record" "txt_spf" {
+  name    = data.sops_file.cloudflare_secrets.data["cloudflare_domain"]
+  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
+  value   = "v=spf1 -all"
+  proxied = false
+  type    = "TXT"
+  ttl     = 1
+}
