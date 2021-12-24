@@ -20,3 +20,9 @@ tasks:
     dir: provision/terraform/cloudflare
     cmds:
       - "terraform apply"
+
+  fmt:cloudflare:
+    desc: Format terraform files
+    dir: provision/terraform/cloudflare
+    cmds:
+      - "terraform fmt"
