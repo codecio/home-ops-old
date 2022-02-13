@@ -54,3 +54,11 @@ resource "cloudflare_record" "traefik" {
   type    = "CNAME"
   ttl     = 1
 }
+resource "cloudflare_record" "grafana" {
+  name    = "grafana"
+  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
+  value   = data.sops_file.cloudflare_secrets.data["cloudflare_lb_nip"]
+  proxied = false
+  type    = "CNAME"
+  ttl     = 1
+}
