@@ -30,15 +30,21 @@ spec:
           hajimari.io/appName: "grafana"
           hajimari.io/enable: "true"
           hajimari.io/icon: "mdi-greenhouse"
-        hosts:
-          - host: "grafana.${SECRET_DOMAIN}"
-            paths:
-              - path: /
-                pathType: Prefix
         tls:
           - hosts:
-              - grafana.${SECRET_DOMAIN}
+              - "grafana.${SECRET_DOMAIN}"
             secretName: "grafana-tls"
+        rules:
+          - host: "grafana.${SECRET_DOMAIN}"
+            http:
+              paths:
+                - path: /
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: grafana
+                      port:
+                        number: 3000
 
     rbac:
       create: true
