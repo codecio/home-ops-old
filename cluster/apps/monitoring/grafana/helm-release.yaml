@@ -226,7 +226,7 @@ spec:
       ##
       image:
         repository: busybox
-        tag: "1.31.1"
+        tag: "1.35.0"
         sha: ""
         pullPolicy: IfNotPresent
 
