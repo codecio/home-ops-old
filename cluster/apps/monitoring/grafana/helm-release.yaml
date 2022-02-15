@@ -21,25 +21,25 @@ spec:
       tag: 8.3.5
 
     ingress:
-      enabled: true
       main:
+        enabled: true
+        ingressClassName: "traefik"
         annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production
-          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           hajimari.io/appName: "grafana"
           hajimari.io/enable: "true"
           hajimari.io/icon: "mdi-greenhouse"
-        enabled: true
         hosts:
-          - host: grafana.${SECRET_DOMAIN}
+          - host: "grafana.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
-        ingressClassName: traefik
         tls:
           - hosts:
               - grafana.${SECRET_DOMAIN}
             secretName: "grafana-tls"
+
     rbac:
       create: true
       pspEnabled: true

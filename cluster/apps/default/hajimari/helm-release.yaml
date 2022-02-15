@@ -26,11 +26,15 @@ spec:
         matchNames:
           - default
           - networking
+          - monitoring
       name: "you"
       customApps:
         - name: Some External Cluster Service
           url: http://192.168.1.100:5000
           icon: test-tube
+        - name: Grafana
+          url: https://grafana.${SECRET_DOMAIN}
+          icon: mdi-greenhouse
       groups:
         - name: Communicate
           links:
