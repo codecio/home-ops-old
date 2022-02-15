@@ -21,10 +21,14 @@ spec:
       tag: 8.3.5
 
     ingress:
+      enabled: true
       main:
         annotations:
           cert-manager.io/cluster-issuer: letsencrypt-production
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
+          hajimari.io/appName: "grafana"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "mdi-greenhouse"
         enabled: true
         hosts:
           - host: grafana.${SECRET_DOMAIN}
@@ -38,56 +42,24 @@ spec:
             secretName: "grafana-tls"
     rbac:
       create: true
-      ## Use an existing ClusterRole/Role (depending on rbac.namespaced false/true)
-      # useExistingRole: name-of-some-(cluster)role
       pspEnabled: true
       pspUseAppArmor: true
       namespaced: false
       extraRoleRules: []
-      # - apiGroups: []
-      #   resources: []
-      #   verbs: []
       extraClusterRoleRules: []
-      # - apiGroups: []
-      #   resources: []
-      #   verbs: []
     serviceAccount:
       create: true
       name:
       nameTest:
-    #  annotations:
-    #    eks.amazonaws.com/role-arn: arn:aws:iam::123456789000:role/iam-role-name-here
       autoMount: true
 
     replicas: 1
 
-    ## Create a headless service for the deployment
     headlessService: false
 
-    ## Create HorizontalPodAutoscaler object for deployment type
-    #
     autoscaling:
       enabled: false
-    #   minReplicas: 1
-    #   maxReplicas: 10
-    #   metrics:
-    #   - type: Resource
-    #     resource:
-    #       name: cpu
-    #       targetAverageUtilization: 60
-    #   - type: Resource
-    #     resource:
-    #       name: memory
-    #       targetAverageUtilization: 60
-
-    ## See `kubectl explain poddisruptionbudget.spec` for more
-    ## ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
     podDisruptionBudget: {}
-    #  minAvailable: 1
-    #  maxUnavailable: 1
-
-    ## See `kubectl explain deployment.spec.strategy` for more
-    ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
     deploymentStrategy:
       type: RollingUpdate
 
