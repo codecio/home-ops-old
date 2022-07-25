@@ -30,3 +30,5 @@ spec:
       logFormat: "json"
       rebootCommand: "/bin/systemctl reboot"
       timeZone: "${TIMEZONE}"
+      rebootSentinelCommand: |-
+        sh -c "! needs-restarting --reboothint"
