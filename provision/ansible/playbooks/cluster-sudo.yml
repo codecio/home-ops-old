@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  tasks:
+  - name: Creating a sudoers file with content
+    copy:
+      dest: "/etc/sudoers.d/ansible"
+      content: |
+        ansible ALL=(ALL)       NOPASSWD: ALL
