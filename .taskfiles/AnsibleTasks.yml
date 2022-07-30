@@ -10,6 +10,24 @@ vars:
 
 tasks:
 
+  venv:
+    desc: Setup venv for ansible.
+    cmds:
+      #- mkdir -p ./provision/ansible/venv/
+      - |
+        python3 -m venv ./provision/ansible/venv/2.13
+        source ./provision/ansible/venv/2.13/bin/activate
+        pip3 install --upgrade pip setuptools
+        pip3 install -r ./provision/ansible/requirements.txt
+        python3 -V
+        ansible --version
+
+  venv-activate:
+    desc: Echo command to activate venv for ansible-core to work within this repo.
+    cmds:
+      - echo "source ./provision/ansible/venv/2.13/bin/activate"
+
+
   init:
     desc: Install / Upgrade Ansible galaxy deps
     dir: provision/ansible
