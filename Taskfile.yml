@@ -32,9 +32,10 @@ tasks:
           Homebrew is not installed. Using MacOS, Linux or WSL?
           Head over to https://brew.sh to get up and running.
     vars:
+      # removed ansible to manage different versions with venv.
+      # add back into DEPS list if you can work with one version.
       DEPS: >-
         age
-        ansible
         direnv
         fluxcd/tap/flux
         go-task/tap/go-task
@@ -48,6 +49,7 @@ tasks:
         sops
         stern
         terraform
+        tflint
         yamllint
         yq
 
